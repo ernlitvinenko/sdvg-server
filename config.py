@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     system_pwd: str = 'admin'
     system_email: EmailStr = 'ernest@elitvinenko.tech'
     domain: str
-    static_url: str
+    static_url: str = ""
 
     class Config:
         env_file = '.env'
