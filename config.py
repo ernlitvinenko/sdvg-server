@@ -3,14 +3,14 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    host: IPvAnyAddress = '0.0.0.0'
-    port: int = 8000
+    host: IPvAnyAddress
+    port: int
     secret: str  # openssl rand -hex 32
     postgres_url: PostgresDsn
-    token_lifetime: int = 15
-    system_username: str = 'admin'
-    system_pwd: str = 'admin'
-    system_email: EmailStr = 'ernest@elitvinenko.tech'
+    token_lifetime: int
+    system_username: str
+    system_pwd: str
+    system_email: EmailStr
     domain: str
     static_url: str = ""
 
