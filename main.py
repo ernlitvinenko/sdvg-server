@@ -9,6 +9,9 @@ from config import Config
 
 from core.api import router as api_router
 
+
+from database import engine
+
 app = FastAPI()
 
 origins = [
@@ -31,6 +34,9 @@ app.include_router(api_router)
 @app.on_event('startup')
 async def on_startup():
     logger.success('Application startup complete at {time}', time=datetime.now(tz=timezone.utc))
+
+
+    
 
 
 if __name__ == '__main__':

@@ -4,11 +4,16 @@ from sqlalchemy import Column, Integer, String, Boolean, BigInteger, NUMERIC, DA
 from datetime import datetime
 from sqlalchemy.orm import relationship
 
-class Lst(Base):
+class Task(Base):
     """ """
-    __tablename__ = "lst"
+    __tablename__ = "task"
     id = Column(Integer, primary_key=True, nullable=False)
-    name = Column(String)
+    profile_id = Column(Integer, ForeignKey("profile.id"))
+    title = Column(String)
+    text = Column(TEXT, nullable=False)
+    till_dt = Column(DATETIME, nullable=False)
+    completed_dt = Column(DATETIME)
     date_created = Column(DATETIME, default=datetime.now())
     date_modified = Column(DATETIME, default=datetime.now())
-    #del = Column(Boolean, nullable=False, default=False) # del - это вообще ключевое слово, так то
+
+    profiles = relationship("Profile", back_populates="profile")
