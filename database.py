@@ -1,10 +1,5 @@
 import json
 
-import asyncpg
-from sqlalchemy import Column, Integer, String, Boolean, BigInteger, NUMERIC, DATETIME, TEXT, ForeignKey
-from datetime import datetime
-from sqlalchemy.orm import relationship
-import asyncio
 from sqlalchemy import text
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.ext.asyncio import AsyncAttrs, create_async_engine, async_sessionmaker
