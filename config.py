@@ -8,9 +8,9 @@ class Settings(BaseSettings):
     secret: str  # openssl rand -hex 32
     postgres_url: PostgresDsn
     token_lifetime: int = 15
-    system_username: str
-    system_pwd: str
-    system_email: EmailStr
+    system_username: str = 'admin'
+    system_pwd: str = 'admin'
+    system_email: EmailStr = 'ernest@elitvinenko.tech'
     domain: str
     static_url: str = ""
 
