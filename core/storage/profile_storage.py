@@ -2,12 +2,12 @@ from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from .base import BaseStorage
-from ..models.profile.requests import NewProfile
+from ..models.profile.requests import CreateProfileRequest
 from ..models.profile.responses import CreateProfileResponse
 
 
 class ProfileStorage(BaseStorage):
-    async def create_profile(self, profile: NewProfile) -> CreateProfileResponse:
+    async def create_profile(self, profile: CreateProfileRequest) -> CreateProfileResponse:
         stmt = text("""
         insert into profile (phone, username, password, email, balance) values  (
         :phone, :username, :password, :email, :balance

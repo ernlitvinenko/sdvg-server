@@ -1,7 +1,7 @@
-from pydantic import BaseModel, Field, SecretStr
-from .requests import NewProfile
+from pydantic import SecretStr
+from .requests import CreateProfileRequest
 
 
-class CreateProfileResponse(NewProfile):
+class CreateProfileResponse(CreateProfileRequest):
     id: int
     password: SecretStr
