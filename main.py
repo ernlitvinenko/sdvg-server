@@ -1,16 +1,10 @@
-from datetime import datetime, timezone
-
 import uvicorn
 from fastapi import FastAPI
-from loguru import logger
 from starlette.middleware.cors import CORSMiddleware
 
 from config import Config
 
 from core.api import router as api_router
-
-
-from database import engine
 
 app = FastAPI()
 
@@ -31,11 +25,9 @@ app.add_middleware(
 app.include_router(api_router)
 
 
-
 @app.get("/")
 def root():
     return {"message": "Hello World"}
-    
 
 
 if __name__ == '__main__':

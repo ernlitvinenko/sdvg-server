@@ -1,5 +1,4 @@
 from core.models.profile.db import Profile
-from core.dto.profile import add_profile
 from datetime import datetime
 from loguru import logger
 

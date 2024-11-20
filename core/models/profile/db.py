@@ -15,5 +15,6 @@ class Profile(Base):
     date_created = Column(DateTime, nullable=True, default=datetime.utcnow)  # Время создания с автозаполнением
     date_modified = Column(DateTime, nullable=True, default=datetime.utcnow)  # Время изменения
     balance = Column(Numeric, nullable=False, default=0)  # Числовое поле с начальным значением 0
+    del_ = Column('del', Boolean, default=False)
     # отношения между таблицами??
     #achievements_profiles = relationship("AchievementProfile", back_populates="achievement_profile")
