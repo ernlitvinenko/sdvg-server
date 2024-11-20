@@ -1,6 +1,7 @@
 import json
-
+import asyncio
 from sqlalchemy import text
+from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.ext.asyncio import AsyncAttrs, create_async_engine, async_sessionmaker
 from config import Config
@@ -9,21 +10,28 @@ from loguru import logger
 # Базовый класс для моделей??
 class Base(AsyncAttrs, DeclarativeBase):
     pass
-print(Config.postgres_url)
 
 engine = create_async_engine(str(Config.postgres_url), pool_size=20, max_overflow=0)
 
-Session = async_sessionmaker(engine, expire_on_commit=False)
+Session = async_sessionmaker(bind=engine, expire_on_commit=False)
+async def get_session() -> AsyncSession:
+    try:
+        async with Session() as session:
+            yield session
+    except Exception as e:
+        logger.error(f"Error in get_session: {e}")
+        raise
 
+async def check_db_session():
+    async with Session() as session:
+        try:
+            print(session)
+            # Выполняем простой запрос через сессию
+            result = await session.execute(text("SELECT * FROM profile LIMIT 10"))
+            print(result)
+            logger.info("Соединение с базой данных успешно установлено!")
+        except Exception as e:
+            logger.error(f"Ошибка подключения к базе данных: {e}")
 
-
-# тестовая проверка подключения
-"""
-async def get_data():
-    # Асинхронный контекстный менеджер
-    async with Session(autoflush=False, bind=engine) as db:
-        task1 = Task(id = 1, text = "eeeee", till_dt=datetime.now())
-        db.add(task1)
-        await db.commit()
-asyncio.run(get_data())
-"""
+# Запуск проверки
+asyncio.run(check_db_session())

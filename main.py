@@ -31,11 +31,10 @@ app.add_middleware(
 app.include_router(api_router)
 
 
-@app.on_event('startup')
-async def on_startup():
-    logger.success('Application startup complete at {time}', time=datetime.now(tz=timezone.utc))
 
-
+@app.get("/")
+def root():
+    return {"message": "Hello World"}
     
 
 

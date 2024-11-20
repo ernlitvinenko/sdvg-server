@@ -3,7 +3,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    host: IPvAnyAddress = '0.0.0.0'
+    host: IPvAnyAddress
     port: int = 8000
     secret: str  # openssl rand -hex 32
     postgres_url: PostgresDsn
