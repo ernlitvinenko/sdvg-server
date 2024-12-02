@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 class Task(Base):
     """ """
     __tablename__ = "task"
-    id = Column(Integer, primary_key=True, nullable=False)
+    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
     profile_id = Column(Integer, ForeignKey("profile.id"))
     title = Column(String)
     text = Column(TEXT, nullable=False)
